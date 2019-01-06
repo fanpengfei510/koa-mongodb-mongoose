@@ -16,6 +16,8 @@ class Db {
     // 默认连接数据库
     this.connect();
   };
+
+  // 连接数据库
   connect(){
     return new Promise((resolve,reject)=>{
       if(!this.dbClient){
@@ -32,6 +34,14 @@ class Db {
       }
     })
   };
+
+  /**
+  |--------------------------------------------------
+  | @method 查询
+    @param collectionName  表名
+    @param json 所要查询的数据
+  |--------------------------------------------------
+  */
   find(collectionName,json){
     return new Promise((resolve,reject)=>{
       this.connect().then((db)=>{
@@ -45,6 +55,15 @@ class Db {
       })
     })
   };
+
+  /**
+  |--------------------------------------------------
+  | @method 修改
+    @param collectionName 表名
+    @param json1 所要修改的数据
+    @param json2 修改成的数据
+  |--------------------------------------------------
+  */
   update(collectionName,json1,json2){
     return new Promise((resolve,reject)=>{
       this.connect().then((db)=>{
@@ -60,6 +79,14 @@ class Db {
       })
     })
   };
+
+  /**
+  |--------------------------------------------------
+  | @method 插入
+    @param collectionName 表名
+    @param json 插入的数据
+  |--------------------------------------------------
+  */
   insert(collectionName,json){
     return new Promise((resolve,reject)=>{
       this.connect().then((db)=>{
@@ -73,6 +100,14 @@ class Db {
       })
     })
   };
+
+  /**
+  |--------------------------------------------------
+  | @method 删除
+    @param collectionName 表名
+    @param json 删除的数据
+  |--------------------------------------------------
+  */
   remove(collectionName,json){
     return new Promise((resolve,reject)=>{
       this.connect().then((db)=>{
