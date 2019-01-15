@@ -7,6 +7,7 @@ const router = new Router();
 const admin = require('./router/admin');
 app.use(cors());
 router.use('/admin',admin)
+<<<<<<< HEAD
 
 router.post('/login',async (ctx,next)=>{
   let { user,password } = ctx.request.body;
@@ -17,6 +18,8 @@ router.post('/login',async (ctx,next)=>{
     ctx.response.body = {status:0,msg:'账号密码错误'};
   }
 })
+=======
+>>>>>>> d42c1252cc3ebdc06ae108974c785e38a7e1cbd1
 
 app.use(router.routes()).use(router.allowedMethods())
 
