@@ -64,6 +64,16 @@ router.post('/add',async (ctx,next)=>{
   }
 })
 
+router.post('/login',async (ctx,next)=>{
+  let { user,password } = ctx.request.body;
+  let result = await DB.find('tableName',{'user' : user});
+  if(result.length !== 0){
+    ctx.response.body = {status:200,msg:'登陆成功'};
+  }else{
+    ctx.response.body = {status:0,msg:'账号密码错误'};
+  }
+})
+
 app.use(router.routes()).use(router.allowedMethods())
 app.listen(3000,()=>{
   console.log('listent 3000')
