@@ -2,7 +2,11 @@ const Router = require('koa-router');   // 路由
 const cors = require('koa2-cors');
 const Koa = require('koa');
 const app = new Koa();
+const bodyParser = require('koa-bodyparser');
 const router = new Router();
+
+app.use(bodyParser())
+
 
 const admin = require('./router/admin');
 app.use(cors());

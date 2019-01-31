@@ -2,10 +2,7 @@ const DB = require('../module/db');
 const Koa = require('koa');
 const axios = require('axios');
 const Router = require('koa-router')();
-const bodyParser = require('koa-bodyparser');
-const app = new Koa();
-
-app.use(bodyParser())
+const jwt = require('jsonwebtoken');
 
 Router.get('/',async (ctx,next)=>{
   let result = await DB.insert('tableName',{'age':121});
@@ -18,15 +15,19 @@ Router.get('/find',async (ctx,next)=>{
   // await ctx.render('index',{
   //   result
   // })
-  await axios.post('http://www.lovejavascript.com/learnLinkManager/getLearnLinkList', {
-    pluginId: 1,
-  })
-  .then(function (response) {
-    ctx.body = response.data;
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+  let token = ctx.request.header.token;
+  if(token){
+    jwt.verify(token,'RS256',function(err,data){
+      if(err){
+        ctx.body = err;
+        return;
+      }
+      ctx.body = {status:200,msg:'token通过'}
+    })
+  }else{
+    ctx.body = '没有token'
+  }
+  next()
 })
 
 Router.get('/update', async (ctx,next)=>{
@@ -49,6 +50,20 @@ Router.post('/add',async (ctx,next)=>{
   let result = await DB.insert('tableName',ctx.request.body)
   if(result.result.ok !== 0){
     ctx.response.body = {status:200,msg:'添加用户名密码成功'};
+  }
+})
+
+Router.post('/login', async (ctx,next)=>{
+  let user = ctx.request.body
+  if(!user){
+    console.log('请输入账户')
+  } else if(user){
+    var token = jwt.sign({user,iat:Math.floor(Date.now() / 1000) - 30},'RS256');
+    ctx.body = {
+      state:200,
+      code:1,
+      token
+    }
   }
 })
 
