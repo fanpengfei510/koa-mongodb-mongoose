@@ -2,12 +2,14 @@ const Koa = require('koa');
 const app = new Koa();
 const mongoose = require('mongoose');
 const session = require('koa-session');
+const cors = require('koa2-cors');
 const bodyParser = require('koa-bodyparser');
 const router = require('./routes');
 const CONFIG = require('./config/config')
 mongoose.connect(CONFIG.mongodb,{ useNewUrlParser:true });
 
 app.use(bodyParser())
+app.use(cors())
 app.keys = ['somethings']
 app.use(session({
   key : CONFIG.session.key,

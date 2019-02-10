@@ -1,6 +1,12 @@
+/**
+|--------------------------------------------------
+| @class 用户登陆、注册、退出
+|--------------------------------------------------
+*/
 const UserModel = require('../models/user');
 
 module.exports = {
+  // 注册
   async signup(ctx,next){
     let { name,email } = ctx.request.body;
     let result = await UserModel.findOne({name,email});
@@ -17,6 +23,7 @@ module.exports = {
       };
     }
   },
+  // 登陆
   async signin(ctx,next){
     let { name,password } = ctx.request.body;
     let result = await UserModel.findOne({name,password});
@@ -27,18 +34,20 @@ module.exports = {
         isAdmin : result.isAdmin,
         email : result.email
       }
+      console.log(ctx.session.user)
       ctx.body = {
-        state : 200,
+        status : 200,
         msg : '登录成功',
         result
       };
     }else{
       ctx.body = {
-        state : 0,
+        status : 0,
         msg : '登录失败'
       };
     }
   },
+  // 退出
   async signout(ctx,next){
     ctx.session = null;
     ctx.body = {

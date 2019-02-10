@@ -1,16 +1,21 @@
+/**
+|--------------------------------------------------
+| @class 评论
+|--------------------------------------------------
+*/
 const CommentsModel = require('../models/comment');
 
 module.exports = {
-  async create(ctx,next){
-    const comment = Object.assign(ctx.request.body,{
-      from : ctx.session.user._id
-    })
+  // 添加评论
+  async add(ctx,next){
+    const comment = Object.assign(ctx.request.body)
     await CommentsModel.create(comment)
     ctx.body = {
       state : 200,
       msg : '评论成功'
     }
   },
+  // 删除评论
   async delete(ctx,next){
     let id = ctx.request.query.id;
     const comment = await CommentsModel.findById(id)
