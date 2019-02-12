@@ -1,24 +1,19 @@
 {
-  "name": "mongodbdemo",
+  "name": "base",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js",
-    "debug": "nodemon --inspect ./index.js"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "art-template": "^4.13.2",
-    "koa": "^2.6.2",
-    "koa-art-template": "^1.1.1",
+    "is-generator-function": "^1.0.7",
+    "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "koa2-cors": "^2.0.6",
-    "mongodb": "^3.1.10"
-  },
-  "devDependencies": {
-    "axios": "^0.18.0"
+    "mongoose": "^5.4.11"
   }
 }
