@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const MenuSchema = new Schema({
   title : String,
   href : String,
-  subMenu : {
+  children : {
     type : Array,
-    subTitle : String,
-    style : String,
+    title : String,
     href : String,
+    id : Schema.Types.ObjectId
   }
 })
 

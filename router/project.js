@@ -1,5 +1,6 @@
 const MyProjectAddTabs = require('../models/project/myProjectAddTabs');
 const MyProjectAddProject = require('../models/project/myProjectAddProject');
+const Menu = require('../models/menu');
 
 module.exports = {
   async addtabs(ctx,next){
@@ -39,10 +40,13 @@ module.exports = {
       }
     }
   },
-  async tabsList(ctx,next){
+  async getMenuList(ctx,next){
     try {
-      let data = await MyProjectAddProject.find({});
-      ctx.render(data)
+      let data = await Menu.find({});
+      ctx.body = {
+        status : 200,
+        data
+      }
     } catch (error) {
       ctx.renderError('失败')
     }

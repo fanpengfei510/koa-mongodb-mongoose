@@ -6,7 +6,7 @@ const router = require('./router')
 const bodyParser = require('koa-bodyparser');
 const Send = require('./utils/Send');
 const Error = require('./utils/Error');
-const jwtKoa = require('koa-jwt')
+const jwtKoa = require('koa-jwt');
 mongoose.connect(CONFIG.mongodb,{ useNewUrlParser : true})
 
 app.use(bodyParser())

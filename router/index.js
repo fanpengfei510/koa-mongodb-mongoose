@@ -7,6 +7,6 @@ module.exports = app => {
   Router.post('/api/project/addtabs',require('./project').addtabs)                // 我的项目，tabs标签
   Router.post('/api/project/addproject',require('./project').addProject)          // 我的项目，添加项目
 
-  Router.get('/api/project/tabsList',require('./project').tabsList)                // 
+  Router.get('/api/menu/list',require('./project').getMenuList)                   // 菜单列表
   app.use(Router.routes()).use(Router.allowedMethods())
 }

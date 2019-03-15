@@ -3,17 +3,13 @@ const mongoose = require('mongoose')
 
 module.exports = {
   async addMenu(ctx,next){
-    let { subTitle,style,menu_id,href } = ctx.request.body;
+    let { title,menu_id,href } = ctx.request.body;
     try {
       if(menu_id){
         await MenuSchema.updateOne(
-          { _id :  mongoose.Types.ObjectId(menu_id)},
-          {
-            $push : {
-              subMenu : { subTitle,style,href }
-            }
-          }
-        )
+          { _id : mongoose.Types.ObjectId(menu_id)},
+          { $push : {children : { id : mongoose.Types.ObjectId(),title,href }} }
+          )
       }else{
         await MenuSchema.create(ctx.request.body,function(err,data){
           console.log(data)
