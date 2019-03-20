@@ -12,7 +12,7 @@ mongoose.connect(CONFIG.mongodb,{ useNewUrlParser : true})
 app.use(bodyParser())
 app.use(Send())
 app.use(Error.renderError).use(jwtKoa(CONFIG.secret).unless({
-  path : [/^\/api\/user\/loginin/] 
+  path : [/^\/api\/user\/loginup/,/^\/api\/user\/loginin/] 
 }))
 router(app)
 
