@@ -13,6 +13,9 @@ const UserSchema = new Schema({
   email : {
     type : String
   },
+  phone : {
+    type : String
+  },
   createTime : {
     type : Date,
     default : Date.now()

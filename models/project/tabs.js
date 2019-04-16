@@ -6,7 +6,7 @@ const TabsSchema = new Schema({
     type : String,
     required : true
   },
-  menu_id : {
+  menuId : {
     type : Schema.Types.ObjectId,
     required : true
   }

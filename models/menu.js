@@ -2,13 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MenuSchema = new Schema({
-  title : String,
+  label : String,
   href : String,
+  userId : {
+    type : Schema.Types.ObjectId,
+    required : true
+  },
   children : {
     type : Array,
     title : String,
     href : String,
-    id : Schema.Types.ObjectId
+    appId : Schema.Types.ObjectId
   }
 })
 

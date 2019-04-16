@@ -2,23 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MyProject = Schema({
-  projectName : {
-    type : String,
-    require : true
-  },
-  codeType : String,
-  projectCode : Number,
-  planTime : {
+  title : {
     type : String,
     required : true
   },
-  endTime : {
-    type : String,
+  head : String,
+  amount : Number,
+  time : Date,
+  userId : {
+    type : Schema.Types.ObjectId,
     required : true
   },
-  doc : String,
-  id : {
-    type : Array,
+  tabsId : {
+    type : Schema.Types.ObjectId,
     required : true
   }
 })
