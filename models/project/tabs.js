@@ -9,7 +9,7 @@ const TabsSchema = new Schema({
   menuId : {
     type : Schema.Types.ObjectId,
     required : true
-  }
+  },
 })
 
 module.exports = mongoose.model('Tabs',TabsSchema,'tabs')

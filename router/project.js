@@ -15,7 +15,6 @@ module.exports = {
       let tabs = await Tabs.find();
       ctx.body = tabs;
     }
-    
   },
 
   // 添加项目
@@ -29,9 +28,7 @@ module.exports = {
       }
     }else{
       try {
-        await MyProject.create(ctx.request.body).catch(err=>{
-          ctx.thorw(500,err)
-        })
+        await MyProject.create(ctx.request.body)
         ctx.body = {
           status : 200,
           msg : '项目创建成功'

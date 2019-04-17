@@ -11,10 +11,6 @@ const TaskSchema = new Schema({
   startTime : Date,
   endTime : Date,
   state : Number,
-  userId : {
-    type : Array,
-    required : true
-  }
 })
 
 module.exports = mongoose.model('TaskSchema',TaskSchema,'task')

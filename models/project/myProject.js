@@ -9,6 +9,9 @@ const MyProject = Schema({
   head : String,
   amount : Number,
   time : Date,
+  tema : {
+    type : Array,
+  },
   userId : {
     type : Schema.Types.ObjectId,
     required : true
