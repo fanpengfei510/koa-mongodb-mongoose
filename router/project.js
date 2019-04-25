@@ -7,9 +7,10 @@ module.exports = {
     let menuId = ctx.params.menuId;
     if(menuId){
       let result = await Tabs.find({menuId});
+      console.log(result)
       ctx.body = {
         data : result,
-        firstId : result[0].id
+        // firstId : result[0].id
       };
     }else{
       let tabs = await Tabs.find();
@@ -19,8 +20,9 @@ module.exports = {
 
   // 添加项目
   async add(ctx,next){
-    let { title } = ctx.request.body;
-    let result = await MyProject.find({title})
+    let { name } = ctx.request.body;
+    console.log(ctx.request.body)
+    let result = await MyProject.find({name})
     if(!!result.length){
       ctx.body = {
         status : 0,

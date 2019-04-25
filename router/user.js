@@ -57,8 +57,7 @@ module.exports = {
 
   // 用户列表
   async userList(ctx,next){
-    let userId = ctx.params.userId;
-    let result = await UserSchema.find({_id:{$ne : userId}}).catch(err=>{
+    let result = await UserSchema.find({}).catch(err=>{
       return {
         status : 500,
         msg : '查询失败',

@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MyProject = Schema({
-  title : {
+  name : {
     type : String,
     required : true
   },
   head : String,
-  amount : Number,
-  time : Date,
+  amount : String,
+  time : Array,
   tema : {
     type : Array,
   },
