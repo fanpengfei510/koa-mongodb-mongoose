@@ -5,7 +5,7 @@ module.exports = app => {
   Router.post('/api/post/loginin',require('./user').loginIn)                      // 登录
   Router.get('/api/get/user',require('./user').userList)                  // 所有用户信息
 
-  Router.post('/api/menu/addmenu',require('./menu').add)                          // 添加导添加应用与菜单
+  Router.post('/api/post/menu/addmenu',require('./menu').add)                          // 添加导添加应用与菜单
   Router.get('/api/get/system/applist',require('./menu').applist)                 // 系统应用与菜单列表
 
   Router.get('/api/get/project/tabs/:menuId',require('./project').getTabs)           // 获取tabs列表

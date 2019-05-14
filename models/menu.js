@@ -6,7 +6,7 @@ const MenuSchema = new Schema({
   href : String,
   userId : {
     type : Schema.Types.ObjectId,
-    required : true
+    required : false
   },
   children : {
     type : Array,
