@@ -1,16 +1,33 @@
 const Koa = require('koa');
-const mongoose = require('mongoose')
-const bodyParser = require('koa-bodyparser')
-const cors = require('koa2-cors')
 const app = new Koa();
-const router = require('./routes')
-const CONFIG = require('./config/config');
+const mongoose = require('mongoose');
+const router = require('./routes');
+const CONFIG = require('./config');
+const Error = require('./utlis')
+const koaJwt = require('koa-jwt')
+const session = require('koa-session');
+const koaBody = require('koa-body');
+mongoose.connect(CONFIG.mongodb,{useNewUrlParser: true});
 
-mongoose.connect(CONFIG.mongodb,{useNewUrlParser : true})
+// app.use(Error.renderError).use(koaJwt(CONFIG.secret).unless({
+//   path : [/^\/api\/post\/user/]
+// }))
 
-app.use(cors())
-app.use(bodyParser())
+app.keys = ['somethings']
+app.use(session({
+  key : CONFIG.session.key,
+  maxAge : CONFIG.session.maxAge
+},app))
+
+app.use(koaBody({
+  multipart : true,
+  formidable : {
+    maxFieldsSize : 200 * 1024 * 1024
+  }
+}))
+
 router(app)
-app.listen(3000,()=>{
-  console.log('server is running at http://localhost:3000')
+
+app.listen(CONFIG.prot,()=>{
+  console.log(`listen pro ${CONFIG.prot}`)
 })
