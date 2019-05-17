@@ -36,5 +36,12 @@ module.exports = {
         msg : '登录失败',
       }
     }
+  },
+  async outLogin(ctx,next){
+    ctx.session.user = null;
+    ctx.response.body = {
+      status : 200,
+      msg : "退出登录成功"
+    }
   }
 }
