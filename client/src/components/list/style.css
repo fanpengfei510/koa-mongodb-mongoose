@@ -1,0 +1,12 @@
+.logo{
+  width: 120px;
+  height: 46px;
+  line-height: 46px;
+  float: left;
+  color: #ffffff;
+}
+
+.ant-layout-header{
+  height: 46px;
+  line-height: 46px;
+}
