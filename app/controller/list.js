@@ -14,6 +14,17 @@ class ListController extends Controller {
     const data = await this.service.list.details(id);
     ctx.body = data
   }
+  async addPost(){
+    const {ctx} = this;
+    console.log(ctx.csrf)
+    const data = await this.service.list.addPost();
+    ctx.body = data
+  }
+  async myPost(){
+    const {ctx} = this;
+    const data = await this.service.list.myPost();
+    ctx.body = data;
+  }
 }
 
 module.exports = ListController;

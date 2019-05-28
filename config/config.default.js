@@ -26,10 +26,17 @@ module.exports = appInfo => {
       }
     }
   }
-  config.security = {
-    csrf : {
-      enable : false
-    }
+  // config.security = {
+  //   csrf : {
+  //     // enable : false
+  //     queryName: '_csrf',
+  //     useSession: true,
+  //     cookieName: 'csrfToken'
+  //   }
+  // }
+  config.middleware = ['role'];
+  config.role = {
+    data : '传参'
   }
   // add your user config here
   const userConfig = {

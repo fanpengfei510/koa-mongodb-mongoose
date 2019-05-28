@@ -3,18 +3,25 @@ const Service = require('egg').Service;
 class TagService extends Service{
   async addTag(){
     const {ctx} = this;
-    const body = Object.assign(ctx.request.body,{'author':ctx.session.user._id})
-    try {
-      let result = await ctx.model.Tag.create(body)
-      return {
-        status : 200,
-        msg : '创建标签成功',
-        result
+    if(!!ctx.session.user){
+      const body = Object.assign(ctx.request.body,{'author':ctx.session.user._id})
+      try {
+        let result = await ctx.model.Tag.create(body)
+        return {
+          status : 200,
+          msg : '创建标签成功',
+          result
+        }
+      } catch (error) {
+        return {
+          status : 401,
+          msg : '创建标签失败',
+        }
       }
-    } catch (error) {
+    }else{
       return {
         status : 401,
-        msg : '创建标签失败',
+        msg : '请先登录在发布',
       }
     }
   }
@@ -28,7 +35,6 @@ class TagService extends Service{
         result
       };
     } catch (error) {
-      console.log(error)
       return {
         status : 401,
         msg : '获取列表失败'

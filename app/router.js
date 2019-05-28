@@ -12,6 +12,9 @@ module.exports = app => {
 
   router.post('/api/comments', controller.comments.send);
 
+  router.post(`/api/addpost`, controller.list.addPost);
+  router.get('/api/mypost', controller.list.myPost);
+
   router.post('/api/addtag', controller.tag.addTag);
   router.get('/api/listtag', controller.tag.listTag);
 };

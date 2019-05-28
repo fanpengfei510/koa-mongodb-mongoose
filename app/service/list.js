@@ -3,20 +3,54 @@ const Service = require('egg').Service;
 class ListService extends Service{
   async create(){
     const { ctx } = this;
+    const param = ctx.query.type;
+    let data;
     // let post = await ctx.model.Post.find({}).populate({path : 'author',select:['username','isAdmin']});
-    let data = await ctx.model.Post.aggregate([
-      {
-        $project : {
-          "_id" : 1,
-          "title" : 1,
-          "content" : 1,
+    if(param == 'all'){
+      data = await ctx.model.Post.aggregate([
+        {
+          $project : {
+            "_id" : 1,
+            "title" : 1,
+            "content" : 1,
+            "author" : 1
+          }
         }
-      }
-    ])
+      ])
+    }else{
+      data = await ctx.model.Post.find({'tag':param})
+    }
     return {
       status : 200,
-      data
+      data,
+      // result
     };
+    // let result = data.map(item=>{
+    //   if(typeof (ctx.session.user) == 'undefined'){
+    //     return{
+    //       "id" : item._id,
+    //       "title" : item.title,
+    //       "content" : item.content,
+    //       "author" : false
+    //     }
+    //   }else{
+    //     if(item.author == ctx.session.user._id){
+    //       return{
+    //         "id" : item._id,
+    //         "title" : item.title,
+    //         "content" : item.content,
+    //         "author" : true
+    //       }
+    //     }else{
+    //       return{
+    //         "id" : item._id,
+    //         "title" : item.title,
+    //         "content" : item.content,
+    //         "author" : false
+    //       }
+    //     }
+    //   }
+    // })
   }
   async details(id){
     const { ctx } = this;
@@ -27,6 +61,54 @@ class ListService extends Service{
       data,
       comment,
       user : !!ctx.session.user
+    }
+  }
+
+  async addPost(){
+    const {ctx} = this;
+    const body = ctx.request.body;
+    if(typeof (ctx.session.user) !== 'undefined'){
+      try {
+        let result = await ctx.model.Post.create(Object.assign(body,{'author' : ctx.session.user._id}))
+        return {
+          status : 200,
+          msg : '发布成功',
+          result
+        }
+      } catch (error) {
+        return {
+          status : 401,
+          msg : '发布失败'
+        }
+      }
+    }else{
+      return{
+        status : 401,
+        msg : '未登录'
+      }
+    }
+  }
+  async myPost(){
+    const {ctx} = this;
+    if(typeof (ctx.session.user) !== 'undefined'){
+      try {
+        let result = await ctx.model.Post.find({'author' : ctx.session.user._id})
+        return {
+          status : 200,
+          msg : '查询成功',
+          result
+        }
+      } catch (error) {
+        return {
+          status : 401,
+          msg : '查询失败'
+        }
+      }
+    }else{
+      return{
+        status : 401,
+        msg : '未登录'
+      }
     }
   }
 }

@@ -10,9 +10,9 @@ module.exports = app =>{
       ref : 'User',
       required : true
     },
-    comments : {
+    tag : {
       type : Schema.Types.ObjectId,
-      ref : 'Comments',
+      ref : 'Tag',
       required : true
     },
     mate : {
