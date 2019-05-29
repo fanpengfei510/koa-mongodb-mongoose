@@ -34,10 +34,10 @@ module.exports = appInfo => {
   //     cookieName: 'csrfToken'
   //   }
   // }
-  config.middleware = ['role'];
-  config.role = {
-    data : '传参'
-  }
+  // config.middleware = ['role'];
+  // config.role = {
+  //   data : '传参'
+  // }
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

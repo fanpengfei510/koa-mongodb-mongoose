@@ -67,7 +67,21 @@ class ListService extends Service{
   async addPost(){
     const {ctx} = this;
     const body = ctx.request.body;
-    if(typeof (ctx.session.user) !== 'undefined'){
+    if(body.id){
+      try {
+        let result = await ctx.model.Post.findByIdAndUpdate({_id:body.id},Object.assign(body,{'author' : ctx.session.user._id}))
+        return {
+          status : 200,
+          msg : '修改成功',
+          result
+        }
+      } catch (error) {
+        return {
+          status : 401,
+          msg : '修改失败'
+        }
+      }
+    }else{
       try {
         let result = await ctx.model.Post.create(Object.assign(body,{'author' : ctx.session.user._id}))
         return {
@@ -81,33 +95,21 @@ class ListService extends Service{
           msg : '发布失败'
         }
       }
-    }else{
-      return{
-        status : 401,
-        msg : '未登录'
-      }
     }
   }
   async myPost(){
     const {ctx} = this;
-    if(typeof (ctx.session.user) !== 'undefined'){
-      try {
-        let result = await ctx.model.Post.find({'author' : ctx.session.user._id})
-        return {
-          status : 200,
-          msg : '查询成功',
-          result
-        }
-      } catch (error) {
-        return {
-          status : 401,
-          msg : '查询失败'
-        }
+    try {
+      let result = await ctx.model.Post.find({'author' : ctx.session.user._id})
+      return {
+        status : 200,
+        msg : '查询成功',
+        result
       }
-    }else{
-      return{
+    } catch (error) {
+      return {
         status : 401,
-        msg : '未登录'
+        msg : '查询失败'
       }
     }
   }

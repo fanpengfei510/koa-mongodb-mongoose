@@ -1,6 +1,12 @@
 module.exports = (option,app) =>{
   return async function role(ctx,next){
-    ctx.state.csrf = ctx.csrf;
-    await next()
+    if(!!ctx.session.user){
+      await next()
+    }else{
+      return ctx.body = {
+        status : 401,
+        msg : '请先登录才进行操作'
+      }
+    }
   }
 }
