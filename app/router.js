@@ -13,6 +13,9 @@ module.exports = app => {
 
   router.post('/api/comments',auth, controller.comments.send);
 
+  router.get('/api/role', controller.role.findAll);
+  router.post('/api/role/create', controller.role.create);
+
   router.post(`/api/addpost`,auth, controller.list.addPost);
   router.get('/api/mypost',auth, controller.list.myPost);
 
