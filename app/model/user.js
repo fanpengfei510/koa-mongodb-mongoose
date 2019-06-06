@@ -11,6 +11,10 @@ module.exports = app =>{
       type : String,
       required :true
     },
+    role : {
+      type : Schema.Types.Object,
+      ref : 'Role'
+    },
     isAdmin : {
       type : Boolean,
       default : false

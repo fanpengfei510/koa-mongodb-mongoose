@@ -16,13 +16,17 @@ class ListController extends Controller {
   }
   async addPost(){
     const {ctx} = this;
-    console.log(ctx.csrf)
     const data = await this.service.list.addPost();
     ctx.body = data
   }
   async myPost(){
     const {ctx} = this;
     const data = await this.service.list.myPost();
+    ctx.body = data;
+  }
+  async delete(){
+    const {ctx} = this;
+    const data = await this.service.list.delete();
     ctx.body = data;
   }
 }

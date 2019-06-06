@@ -18,6 +18,7 @@ module.exports = app => {
 
   router.post(`/api/addpost`,auth, controller.list.addPost);
   router.get('/api/mypost',auth, controller.list.myPost);
+  router.get('/api/delete',auth, controller.list.delete);
 
   router.post('/api/addtag',auth, controller.tag.addTag);
   router.get('/api/listtag', controller.tag.listTag);

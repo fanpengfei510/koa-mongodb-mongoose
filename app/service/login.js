@@ -4,7 +4,7 @@ class loginService extends Service {
   async index(username, password) {
     const { ctx } = this;
     try {
-      const result = await ctx.model.User.findOne({ username, password });
+      const result = await ctx.model.User.findOne({ username, password }).populate({path:'role',select:['access','name']});
       if (!!Object.keys(result).length) {
         ctx.session.user = result;
         return {

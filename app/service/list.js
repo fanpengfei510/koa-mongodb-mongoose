@@ -113,6 +113,22 @@ class ListService extends Service{
       }
     }
   }
+  async delete(){
+    const {ctx} = this;
+    const id = ctx.query.id;
+    try {
+      await ctx.model.Post.findByIdAndRemove(id);
+      return {
+        status : 200,
+        msg : '删除成功',
+      }
+    } catch (error) {
+      return {
+        status : 401,
+        msg : '删除失败'
+      }
+    }
+  }
 }
 
 module.exports = ListService;
